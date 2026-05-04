@@ -185,13 +185,6 @@ OpenCodeに以下を伝えてください：
 Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.opencode/INSTALL.md
 ```
 
-### OpenClaw
-
-OpenClawに以下を伝えてください：
-```
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.openclaw/INSTALL.md
-```
-
 ### Cursor
 
 Cursorはこのリポジトリをクローンすると `.cursor-plugin/plugin.json` 経由でプラグインを自動検出します。手動インストールは不要です — クローンしてCursorで開くだけです。
@@ -239,7 +232,6 @@ Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Und
 | Claude Code | ✅ ネイティブ | プラグインマーケットプレイス |
 | Codex | ✅ サポート | AI駆動インストール |
 | OpenCode | ✅ サポート | AI駆動インストール |
-| OpenClaw | ✅ サポート | AI駆動インストール |
 | Cursor | ✅ サポート | 自動検出 |
 | VS Code + GitHub Copilot | ✅ サポート | 自動検出 |
 | Copilot CLI | ✅ サポート | プラグインインストール |

@@ -185,13 +185,6 @@ OpenCode'a söyle:
 Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.opencode/INSTALL.md
 ```
 
-### OpenClaw
-
-OpenClaw'a söyle:
-```
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.openclaw/INSTALL.md
-```
-
 ### Cursor
 
 Bu depo klonlandığında Cursor, eklentiyi `.cursor-plugin/plugin.json` aracılığıyla otomatik olarak keşfeder. Manuel kurulum gerekmez — sadece klonla ve Cursor'da aç.
@@ -239,7 +232,6 @@ Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Und
 | Claude Code | ✅ Yerli | Eklenti pazarı |
 | Codex | ✅ Destekleniyor | AI güdümlü kurulum |
 | OpenCode | ✅ Destekleniyor | AI güdümlü kurulum |
-| OpenClaw | ✅ Destekleniyor | AI güdümlü kurulum |
 | Cursor | ✅ Destekleniyor | Otomatik keşif |
 | VS Code + GitHub Copilot | ✅ Destekleniyor | Otomatik keşif |
 | Copilot CLI | ✅ Destekleniyor | Eklenti kurulumu |

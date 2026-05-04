@@ -185,13 +185,6 @@ Tell OpenCode:
 Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.opencode/INSTALL.md
 ```
 
-### OpenClaw
-
-Tell OpenClaw:
-```
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.openclaw/INSTALL.md
-```
-
 ### Cursor
 
 Cursor auto-discovers the plugin via `.cursor-plugin/plugin.json` when this repo is cloned. No manual installation needed — just clone and open in Cursor.
@@ -239,7 +232,6 @@ Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Und
 | Claude Code | ✅ Native | Plugin marketplace |
 | Codex | ✅ Supported | AI-driven install |
 | OpenCode | ✅ Supported | AI-driven install |
-| OpenClaw | ✅ Supported | AI-driven install |
 | Cursor | ✅ Supported | Auto-discovery |
 | VS Code + GitHub Copilot | ✅ Supported | Auto-discovery |
 | Copilot CLI | ✅ Supported | Plugin install |

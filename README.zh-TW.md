@@ -184,13 +184,6 @@ Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Und
 Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.opencode/INSTALL.md
 ```
 
-### OpenClaw
-
-告訴 OpenClaw：
-```
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.openclaw/INSTALL.md
-```
-
 ### Cursor
 
 複製此儲存庫後，Cursor 會自動透過 `.cursor-plugin/plugin.json` 檔案發現外掛程式。無需手動安裝 — 只需複製並在 Cursor 中開啟即可。
@@ -238,7 +231,6 @@ Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Und
 | Claude Code | ✅ 原生 | 外掛程式市集 |
 | Codex | ✅ 支援 | AI 驅動安裝 |
 | OpenCode | ✅ 支援 | AI 驅動安裝 |
-| OpenClaw | ✅ 支援 | AI 驅動安裝 |
 | Cursor | ✅ 支援 | 自動發現 |
 | VS Code + GitHub Copilot | ✅ 支援 | 自動發現 |
 | Copilot CLI | ✅ 支援 | 外掛程式安裝 |

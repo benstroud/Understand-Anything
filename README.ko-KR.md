@@ -184,13 +184,6 @@ OpenCode에 입력하세요:
 Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.opencode/INSTALL.md
 ```
 
-### OpenClaw
-
-OpenClaw에 입력하세요:
-```
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.openclaw/INSTALL.md
-```
-
 ### Cursor
 
 이 저장소를 클론하면 Cursor가 `.cursor-plugin/plugin.json`을 통해 플러그인을 자동으로 인식합니다. 수동 설치가 필요 없습니다. 클론 후 Cursor에서 열기만 하면 됩니다.
@@ -238,7 +231,6 @@ Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Und
 | Claude Code | ✅ 네이티브 | 플러그인 마켓플레이스 |
 | Codex | ✅ 지원 | AI 기반 설치 |
 | OpenCode | ✅ 지원 | AI 기반 설치 |
-| OpenClaw | ✅ 지원 | AI 기반 설치 |
 | Cursor | ✅ 지원 | 자동 인식 |
 | VS Code + GitHub Copilot | ✅ 지원 | 자동 인식 |
 | Copilot CLI | ✅ 지원 | 플러그인 설치 |

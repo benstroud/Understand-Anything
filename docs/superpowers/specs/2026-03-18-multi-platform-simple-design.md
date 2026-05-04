@@ -2,7 +2,7 @@
 
 **Date**: 2026-03-18
 **Status**: Approved
-**Goal**: Make Understand-Anything skills work across Codex, OpenClaw, OpenCode, and Cursor with zero build step — same files everywhere.
+**Goal**: Make Understand-Anything skills work across Codex, OpenCode, and Cursor with zero build step — same files everywhere.
 
 ## Design Principles
 
@@ -77,7 +77,6 @@ Each platform gets an `INSTALL.md` that the AI agent can fetch and follow:
 |------|----------|-------------------|
 | `.codex/INSTALL.md` | Codex | `git clone` + symlink to `~/.agents/skills/` |
 | `.opencode/INSTALL.md` | OpenCode | Plugin config in `opencode.json` |
-| `.openclaw/INSTALL.md` | OpenClaw | `git clone` + symlink to `~/.openclaw/skills/` |
 | `.cursor/INSTALL.md` | Cursor | `git clone` + symlink to `.cursor/plugins/` |
 
 User tells the agent one line:
@@ -98,7 +97,7 @@ Add a "Multi-Platform Installation" section to README.md with one-liner per plat
 | Delete | `agents/project-scanner.md`, `agents/file-analyzer.md`, `agents/architecture-analyzer.md`, `agents/tour-builder.md`, `agents/graph-reviewer.md` |
 | Create | `skills/understand/project-scanner-prompt.md`, `skills/understand/file-analyzer-prompt.md`, `skills/understand/architecture-analyzer-prompt.md`, `skills/understand/tour-builder-prompt.md`, `skills/understand/graph-reviewer-prompt.md` |
 | Create | `agents/knowledge-graph-guide.md` |
-| Create | `.codex/INSTALL.md`, `.opencode/INSTALL.md`, `.openclaw/INSTALL.md`, `.cursor/INSTALL.md` |
+| Create | `.codex/INSTALL.md`, `.opencode/INSTALL.md`, `.cursor/INSTALL.md` |
 | Modify | `skills/understand/SKILL.md` (dispatch references) |
 | Modify | `README.md` (multi-platform section) |
 
@@ -117,5 +116,4 @@ Add a "Multi-Platform Installation" section to README.md with one-liner per plat
 | Claude Code | Marketplace (existing) | `agents/` dir | `skills/` dir |
 | Codex | INSTALL.md → symlink | N/A (templates in skill) | `~/.agents/skills/` |
 | OpenCode | INSTALL.md → plugin config | N/A (templates in skill) | Plugin auto-registers |
-| OpenClaw | INSTALL.md → symlink | N/A (templates in skill) | `~/.openclaw/skills/` |
 | Cursor | INSTALL.md → symlink | `agents/` dir | `.cursor/plugins/` |

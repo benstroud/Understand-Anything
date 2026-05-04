@@ -2,7 +2,7 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** Make Understand-Anything skills work across Codex, OpenClaw, OpenCode, and Cursor — same files everywhere, no build step.
+**Goal:** Make Understand-Anything skills work across Codex, OpenCode, and Cursor — same files everywhere, no build step.
 
 **Architecture:** Move 5 pipeline agents into `skills/understand/` as prompt templates. Create a reusable `knowledge-graph-guide` agent. Move per-platform config directories to repo root for auto-discovery. Add Cursor and Claude plugin descriptors.
 
@@ -381,7 +381,6 @@ git commit -m "feat: add knowledge-graph-guide agent for graph navigation and qu
 **Files:**
 - Move: `understand-anything-plugin/.codex/INSTALL.md` → `.codex/INSTALL.md`
 - Move: `understand-anything-plugin/.opencode/INSTALL.md` → `.opencode/INSTALL.md`
-- Move: `understand-anything-plugin/.openclaw/INSTALL.md` → `.openclaw/INSTALL.md`
 - Delete: `understand-anything-plugin/.cursor/INSTALL.md` (replaced by `.cursor-plugin/plugin.json`)
 
 **Step 1: Move the three platform directories to root**
@@ -390,7 +389,6 @@ git commit -m "feat: add knowledge-graph-guide agent for graph navigation and qu
 cd /Users/yuxianglin/Desktop/opensource/Understand-Anything
 git mv understand-anything-plugin/.codex ./.codex
 git mv understand-anything-plugin/.opencode ./.opencode
-git mv understand-anything-plugin/.openclaw ./.openclaw
 ```
 
 **Step 2: Delete .cursor/ (replaced by .cursor-plugin/ in Task 5)**
@@ -479,9 +477,6 @@ The INSTALL.md files moved from `understand-anything-plugin/.codex/INSTALL.md` t
 OLD: .../refs/heads/main/understand-anything-plugin/.codex/INSTALL.md
 NEW: .../refs/heads/main/.codex/INSTALL.md
 
-OLD: .../refs/heads/main/understand-anything-plugin/.openclaw/INSTALL.md
-NEW: .../refs/heads/main/.openclaw/INSTALL.md
-
 OLD: .../refs/heads/main/understand-anything-plugin/.opencode/INSTALL.md
 NEW: .../refs/heads/main/.opencode/INSTALL.md
 ```
@@ -510,7 +505,7 @@ git commit -m "docs: update multi-platform URLs after moving configs to root"
 **Step 1: Check platform configs at root**
 
 ```bash
-ls .codex/INSTALL.md .opencode/INSTALL.md .openclaw/INSTALL.md
+ls .codex/INSTALL.md .opencode/INSTALL.md
 ls .cursor-plugin/plugin.json .claude-plugin/plugin.json
 ```
 
@@ -532,7 +527,6 @@ Skills, agents, and packages should all still exist inside the wrapper.
 ls understand-anything-plugin/.codex/ 2>/dev/null    # should fail
 ls understand-anything-plugin/.cursor/ 2>/dev/null   # should fail
 ls understand-anything-plugin/.opencode/ 2>/dev/null # should fail
-ls understand-anything-plugin/.openclaw/ 2>/dev/null # should fail
 ```
 
 **Step 4: Run tests**

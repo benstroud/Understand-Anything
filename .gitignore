@@ -7,7 +7,12 @@ dist
 .env.*
 coverage/
 *.log
-.claude/
+.claude/*
+!.claude/skills/
+.claude/skills/*
+!.claude/skills/sync-fork/
+.claude/skills/sync-fork/*
+!.claude/skills/sync-fork/SKILL.md
 .worktrees/
 homepage/public/demo/
 .private/

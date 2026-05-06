@@ -45,6 +45,9 @@
 
 ---
 
+> [!NOTE]
+> **This is a fork of [Lum1104/Understand-Anything](https://github.com/Lum1104/Understand-Anything).** It exists to make Understand-Anything accessible to organizations whose security policies block installation of software that contains files referencing "openclaw". All openclaw references and files have been removed; everything else is identical to the upstream project. Installation instructions below reference this fork (`benstroud/Understand-Anything`).
+
 > [!TIP]
 > **A huge thank you to the community!** The support for Understand-Anything has been incredible. If this tool saves you a few minutes of digging through complexity, that's all I wanted. 🚀
 
@@ -121,7 +124,7 @@ Point `/understand-knowledge` at a [Karpathy-pattern LLM wiki](https://gist.gith
 ### 1. Install the plugin
 
 ```bash
-/plugin marketplace add Lum1104/Understand-Anything
+/plugin marketplace add benstroud/Understand-Anything
 /plugin install understand-anything
 ```
 
@@ -172,7 +175,7 @@ Understand-Anything works across multiple AI coding platforms.
 ### Claude Code (Native)
 
 ```bash
-/plugin marketplace add Lum1104/Understand-Anything
+/plugin marketplace add benstroud/Understand-Anything
 /plugin install understand-anything
 ```
 
@@ -180,14 +183,14 @@ Understand-Anything works across multiple AI coding platforms.
 
 Tell Codex:
 ```
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.codex/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.codex/INSTALL.md
 ```
 
 ### OpenCode
 
 Tell OpenCode:
 ```
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.opencode/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.opencode/INSTALL.md
 ```
 
 ### Cursor
@@ -200,34 +203,34 @@ VS Code with GitHub Copilot (v1.108+) auto-discovers the plugin via `.copilot-pl
 
 For personal skills (available across all projects), tell GitHub Copilot:
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.vscode/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.vscode/INSTALL.md
 ```
 
 ### Copilot CLI
 
 ```bash
-copilot plugin install Lum1104/Understand-Anything:understand-anything-plugin
+copilot plugin install benstroud/Understand-Anything:understand-anything-plugin
 ```
 
 ### Antigravity
 
 Tell Antigravity:
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.antigravity/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.antigravity/INSTALL.md
 ```
 
 ### Gemini CLI
 
 Tell Gemini CLI:
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.gemini/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.gemini/INSTALL.md
 ```
 
 ### Pi Agent
 
 Tell Pi Agent:
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.pi/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.pi/INSTALL.md
 ```
 
 ### Platform Compatibility

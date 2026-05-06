@@ -3,6 +3,7 @@ import { SearchEngine } from "@understand-anything/core/search";
 import type { SearchResult } from "@understand-anything/core/search";
 import type { GraphIssue } from "@understand-anything/core/schema";
 import type {
+  GraphNode,
   KnowledgeGraph,
   TourStep,
 } from "@understand-anything/core/types";
@@ -49,12 +50,47 @@ const DEFAULT_FILTERS: FilterState = {
 /** Categories used for node type filter toggles. Single source of truth for NodeCategory. */
 export type NodeCategory = "code" | "config" | "docs" | "infra" | "data" | "domain" | "knowledge";
 
-/** Find which layer a node belongs to. Returns layerId or null. */
-function findNodeLayer(graph: KnowledgeGraph, nodeId: string): string | null {
+/**
+ * Build the (id → node) and (id → layerId) lookup maps that the rest of
+ * the dashboard reads via store selectors. Centralised so `setGraph` and
+ * any future graph-replacement path stay in sync.
+ *
+ * Two layer indexes, intentionally distinct:
+ *
+ * - `nodeIdToLayerId` preserves the prior `findNodeLayer` "first matching
+ *   layer wins" semantics — if a node id appears in multiple layers
+ *   (rare but legal in the schema), the first occurrence in `graph.layers`
+ *   order is the one we map to. Drives navigation (drillIntoLayer, tour
+ *   step → layer, sidebar history) where a single canonical layer is the
+ *   right answer.
+ *
+ * - `nodeIdToLayerIds` records *every* layer a node belongs to. Drives
+ *   membership queries (filterNodes) where the prior `Layer[] +
+ *   layer.nodeIds.includes` shape was any-layer-wins — a node in L1 and
+ *   L2 with only L2 selected must still pass. Collapsing to first-wins
+ *   for filtering would be a silent regression.
+ */
+function buildGraphIndexes(graph: KnowledgeGraph): {
+  nodesById: Map<string, GraphNode>;
+  nodeIdToLayerId: Map<string, string>;
+  nodeIdToLayerIds: Map<string, Set<string>>;
+} {
+  const nodesById = new Map<string, GraphNode>();
+  for (const node of graph.nodes) nodesById.set(node.id, node);
+  const nodeIdToLayerId = new Map<string, string>();
+  const nodeIdToLayerIds = new Map<string, Set<string>>();
   for (const layer of graph.layers) {
-    if (layer.nodeIds.includes(nodeId)) return layer.id;
+    for (const nid of layer.nodeIds) {
+      if (!nodeIdToLayerId.has(nid)) nodeIdToLayerId.set(nid, layer.id);
+      let set = nodeIdToLayerIds.get(nid);
+      if (!set) {
+        set = new Set<string>();
+        nodeIdToLayerIds.set(nid, set);
+      }
+      set.add(layer.id);
+    }
   }
-  return null;
+  return { nodesById, nodeIdToLayerId, nodeIdToLayerIds };
 }
 
 /** Maximum number of entries in the sidebar navigation history. */
@@ -62,6 +98,12 @@ const MAX_HISTORY = 50;
 
 interface DashboardStore {
   graph: KnowledgeGraph | null;
+  /** id → node lookup, rebuilt by setGraph. Empty before any graph loads. */
+  nodesById: Map<string, GraphNode>;
+  /** id → layer id (first-matching-layer wins), rebuilt by setGraph. Empty before any graph loads. */
+  nodeIdToLayerId: Map<string, string>;
+  /** id → set of every layer the node belongs to, rebuilt by setGraph. Empty before any graph loads. */
+  nodeIdToLayerIds: Map<string, Set<string>>;
   selectedNodeId: string | null;
   searchQuery: string;
   searchResults: SearchResult[];
@@ -154,7 +196,14 @@ interface DashboardStore {
   expandedContainers: Set<string>;
   toggleContainer: (containerId: string) => void;
   expandContainer: (containerId: string) => void;
+  collapseContainer: (containerId: string) => void;
   collapseAllContainers: () => void;
+  /** Container the user just manually expanded; viewport should lock onto it. Cleared by GraphView once the lock is applied. */
+  pendingFocusContainer: string | null;
+  setPendingFocusContainer: (containerId: string | null) => void;
+  /** True while TourFitView is waiting for highlighted nodes to materialise (Stage 2 layout in progress). Drives the "Computing layout…" overlay. */
+  tourFitPending: boolean;
+  setTourFitPending: (pending: boolean) => void;
 
   containerLayoutCache: Map<
     string,
@@ -189,11 +238,11 @@ function getSortedTour(graph: KnowledgeGraph): TourStep[] {
 
 /** Navigate tour step to the correct layer for the first highlighted node. */
 function navigateTourToLayer(
-  graph: KnowledgeGraph,
+  nodeIdToLayerId: Map<string, string>,
   nodeIds: string[],
 ): Partial<DashboardStore> {
   if (nodeIds.length === 0) return {};
-  const layerId = findNodeLayer(graph, nodeIds[0]);
+  const layerId = nodeIdToLayerId.get(nodeIds[0]);
   if (layerId) {
     return {
       navigationLevel: "layer-detail" as const,
@@ -203,8 +252,37 @@ function navigateTourToLayer(
   return {};
 }
 
+/**
+ * Container ids derive from per-layer state — folder names in folder-strategy
+ * layers, community indices (`container:cluster-N`) in community-strategy
+ * layers — and collide across layers (e.g. API Contracts and Load Testing
+ * both produce `container:cluster-0`). When a tour step crosses layers we
+ * must drop the previous layer's container caches so Stage 2 actually re-
+ * runs for the new layer's children. Mirrors the reset block in
+ * `drillIntoLayer`.
+ */
+function layerResetIfChanged(
+  layerNav: Partial<DashboardStore>,
+  prevLayerId: string | null,
+): Partial<DashboardStore> {
+  const next = layerNav.activeLayerId;
+  if (!next || next === prevLayerId) return {};
+  return {
+    containerLayoutCache: new Map(),
+    containerSizeMemory: new Map(),
+    expandedContainers: new Set(),
+    // Drop any pending focus too — its id was scoped to the previous
+    // layer and would otherwise re-collide with a same-id container in
+    // the new layer for the duration of the 1.2s timer.
+    pendingFocusContainer: null,
+  };
+}
+
 export const useDashboardStore = create<DashboardStore>()((set, get) => ({
   graph: null,
+  nodesById: new Map<string, GraphNode>(),
+  nodeIdToLayerId: new Map<string, string>(),
+  nodeIdToLayerIds: new Map<string, Set<string>>(),
   selectedNodeId: null,
   searchQuery: "",
   searchResults: [],
@@ -250,6 +328,7 @@ export const useDashboardStore = create<DashboardStore>()((set, get) => ({
       containerLayoutCache: new Map(),
       containerSizeMemory: new Map(),
       expandedContainers: new Set(),
+      pendingFocusContainer: null,
     })),
 
   setGraph: (graph) => {
@@ -259,8 +338,12 @@ export const useDashboardStore = create<DashboardStore>()((set, get) => ({
     const { viewMode, domainGraph, activeDomainId } = get();
     // Preserve domain view if a domain graph is already loaded
     const keepDomainView = viewMode === "domain" && domainGraph !== null;
+    const { nodesById, nodeIdToLayerId, nodeIdToLayerIds } = buildGraphIndexes(graph);
     set({
       graph,
+      nodesById,
+      nodeIdToLayerId,
+      nodeIdToLayerIds,
       searchEngine,
       searchResults,
       navigationLevel: "overview",
@@ -272,6 +355,7 @@ export const useDashboardStore = create<DashboardStore>()((set, get) => ({
       activeDomainId: keepDomainView ? activeDomainId : null,
       containerLayoutCache: new Map(),
       expandedContainers: new Set(),
+      pendingFocusContainer: null,
       containerSizeMemory: new Map(),
       stage1Tick: 0,
       layoutIssues: [],
@@ -296,9 +380,9 @@ export const useDashboardStore = create<DashboardStore>()((set, get) => ({
   },
 
   navigateToNodeInLayer: (nodeId) => {
-    const { graph, selectedNodeId, nodeHistory } = get();
+    const { graph, selectedNodeId, nodeHistory, nodeIdToLayerId } = get();
     if (!graph) return;
-    const layerId = findNodeLayer(graph, nodeId);
+    const layerId = nodeIdToLayerId.get(nodeId) ?? null;
     const newHistory =
       selectedNodeId && nodeId !== selectedNodeId
         ? [...nodeHistory, selectedNodeId].slice(-MAX_HISTORY)
@@ -323,11 +407,11 @@ export const useDashboardStore = create<DashboardStore>()((set, get) => ({
   },
 
   navigateToHistoryIndex: (index) => {
-    const { nodeHistory, graph } = get();
+    const { nodeHistory, graph, nodeIdToLayerId } = get();
     if (!graph || index < 0 || index >= nodeHistory.length) return;
     const targetId = nodeHistory[index];
     const newHistory = nodeHistory.slice(0, index);
-    const layerId = findNodeLayer(graph, targetId);
+    const layerId = nodeIdToLayerId.get(targetId) ?? null;
     set({
       selectedNodeId: targetId,
       nodeHistory: newHistory,
@@ -336,11 +420,11 @@ export const useDashboardStore = create<DashboardStore>()((set, get) => ({
   },
 
   goBackNode: () => {
-    const { nodeHistory, graph } = get();
+    const { nodeHistory, graph, nodeIdToLayerId } = get();
     if (nodeHistory.length === 0 || !graph) return;
     const prevNodeId = nodeHistory[nodeHistory.length - 1];
     const newHistory = nodeHistory.slice(0, -1);
-    const layerId = findNodeLayer(graph, prevNodeId);
+    const layerId = nodeIdToLayerId.get(prevNodeId) ?? null;
     if (layerId) {
       set({
         navigationLevel: "layer-detail",
@@ -371,6 +455,7 @@ export const useDashboardStore = create<DashboardStore>()((set, get) => ({
       containerLayoutCache: new Map(),
       containerSizeMemory: new Map(),
       expandedContainers: new Set(),
+      pendingFocusContainer: null,
     }),
 
   navigateToOverview: () =>
@@ -385,6 +470,7 @@ export const useDashboardStore = create<DashboardStore>()((set, get) => ({
       containerLayoutCache: new Map(),
       containerSizeMemory: new Map(),
       expandedContainers: new Set(),
+      pendingFocusContainer: null,
     }),
 
   setFocusNode: (nodeId) =>
@@ -397,6 +483,7 @@ export const useDashboardStore = create<DashboardStore>()((set, get) => ({
       containerLayoutCache: new Map(),
       containerSizeMemory: new Map(),
       expandedContainers: new Set(),
+      pendingFocusContainer: null,
     }),
   setSearchMode: (mode) => set({ searchMode: mode }),
   setSearchQuery: (query) => {
@@ -420,6 +507,7 @@ export const useDashboardStore = create<DashboardStore>()((set, get) => ({
       containerLayoutCache: new Map(),
       containerSizeMemory: new Map(),
       expandedContainers: new Set(),
+      pendingFocusContainer: null,
     }),
 
   openCodeViewer: (nodeId) =>
@@ -483,16 +571,17 @@ export const useDashboardStore = create<DashboardStore>()((set, get) => ({
   },
 
   startTour: () => {
-    const { graph } = get();
+    const { graph, nodeIdToLayerId, activeLayerId } = get();
     if (!graph || !graph.tour || graph.tour.length === 0) return;
     const sorted = getSortedTour(graph);
-    const layerNav = navigateTourToLayer(graph, sorted[0].nodeIds);
+    const layerNav = navigateTourToLayer(nodeIdToLayerId, sorted[0].nodeIds);
     set({
       tourActive: true,
       currentTourStep: 0,
       tourHighlightedNodeIds: sorted[0].nodeIds,
       selectedNodeId: null,
       ...layerNav,
+      ...layerResetIfChanged(layerNav, activeLayerId),
     });
   },
 
@@ -504,44 +593,47 @@ export const useDashboardStore = create<DashboardStore>()((set, get) => ({
     }),
 
   setTourStep: (step) => {
-    const { graph } = get();
+    const { graph, nodeIdToLayerId, activeLayerId } = get();
     if (!graph || !graph.tour || graph.tour.length === 0) return;
     const sorted = getSortedTour(graph);
     if (step < 0 || step >= sorted.length) return;
-    const layerNav = navigateTourToLayer(graph, sorted[step].nodeIds);
+    const layerNav = navigateTourToLayer(nodeIdToLayerId, sorted[step].nodeIds);
     set({
       currentTourStep: step,
       tourHighlightedNodeIds: sorted[step].nodeIds,
       ...layerNav,
+      ...layerResetIfChanged(layerNav, activeLayerId),
     });
   },
 
   nextTourStep: () => {
-    const { graph, currentTourStep } = get();
+    const { graph, currentTourStep, nodeIdToLayerId, activeLayerId } = get();
     if (!graph || !graph.tour || graph.tour.length === 0) return;
     const sorted = getSortedTour(graph);
     if (currentTourStep < sorted.length - 1) {
       const next = currentTourStep + 1;
-      const layerNav = navigateTourToLayer(graph, sorted[next].nodeIds);
+      const layerNav = navigateTourToLayer(nodeIdToLayerId, sorted[next].nodeIds);
       set({
         currentTourStep: next,
         tourHighlightedNodeIds: sorted[next].nodeIds,
         ...layerNav,
+        ...layerResetIfChanged(layerNav, activeLayerId),
       });
     }
   },
 
   prevTourStep: () => {
-    const { graph, currentTourStep } = get();
+    const { graph, currentTourStep, nodeIdToLayerId, activeLayerId } = get();
     if (!graph || !graph.tour || graph.tour.length === 0) return;
     if (currentTourStep > 0) {
       const sorted = getSortedTour(graph);
       const prev = currentTourStep - 1;
-      const layerNav = navigateTourToLayer(graph, sorted[prev].nodeIds);
+      const layerNav = navigateTourToLayer(nodeIdToLayerId, sorted[prev].nodeIds);
       set({
         currentTourStep: prev,
         tourHighlightedNodeIds: sorted[prev].nodeIds,
         ...layerNav,
+        ...layerResetIfChanged(layerNav, activeLayerId),
       });
     }
   },
@@ -592,18 +684,36 @@ export const useDashboardStore = create<DashboardStore>()((set, get) => ({
   },
 
   expandedContainers: new Set<string>(),
+  pendingFocusContainer: null,
+  setPendingFocusContainer: (containerId) =>
+    set({ pendingFocusContainer: containerId }),
+  tourFitPending: false,
+  setTourFitPending: (pending) => set({ tourFitPending: pending }),
   toggleContainer: (containerId) =>
     set((state) => {
       const next = new Set(state.expandedContainers);
-      if (next.has(containerId)) next.delete(containerId);
-      else next.add(containerId);
-      return { expandedContainers: next };
+      const willExpand = !next.has(containerId);
+      if (willExpand) next.add(containerId);
+      else next.delete(containerId);
+      return {
+        expandedContainers: next,
+        pendingFocusContainer: willExpand
+          ? containerId
+          : state.pendingFocusContainer,
+      };
     }),
   expandContainer: (containerId) =>
     set((state) => {
       if (state.expandedContainers.has(containerId)) return {};
       const next = new Set(state.expandedContainers);
       next.add(containerId);
+      return { expandedContainers: next };
+    }),
+  collapseContainer: (containerId) =>
+    set((state) => {
+      if (!state.expandedContainers.has(containerId)) return {};
+      const next = new Set(state.expandedContainers);
+      next.delete(containerId);
       return { expandedContainers: next };
     }),
   collapseAllContainers: () => set({ expandedContainers: new Set() }),
@@ -618,7 +728,7 @@ export const useDashboardStore = create<DashboardStore>()((set, get) => ({
       return { containerLayoutCache: next, containerSizeMemory: sizeNext };
     }),
   clearContainerLayouts: () =>
-    set({ containerLayoutCache: new Map(), expandedContainers: new Set() }),
+    set({ containerLayoutCache: new Map(), expandedContainers: new Set(), pendingFocusContainer: null }),
 
   containerSizeMemory: new Map(),
 
@@ -640,3 +750,4 @@ export const useDashboardStore = create<DashboardStore>()((set, get) => ({
     }),
   clearLayoutIssues: () => set({ layoutIssues: [] }),
 }));
+

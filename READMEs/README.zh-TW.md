@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <a href="README.md">English</a> | <a href="README.zh-CN.md">简体中文</a> | <a href="README.zh-TW.md">繁體中文</a> | <a href="README.ja-JP.md">日本語</a> | <a href="README.ko-KR.md">한국어</a> | <a href="README.es-ES.md">Español</a> | <a href="README.tr-TR.md">Türkçe</a>
+  <a href="../README.md">English</a> | <a href="README.zh-CN.md">简体中文</a> | <a href="README.zh-TW.md">繁體中文</a> | <a href="README.ja-JP.md">日本語</a> | <a href="README.ko-KR.md">한국어</a> | <a href="README.es-ES.md">Español</a> | <a href="README.tr-TR.md">Türkçe</a>
 </p>
 
 <p align="center">
@@ -30,11 +30,16 @@
   <a href="#opencode"><img src="https://img.shields.io/badge/OpenCode-38bdf8" alt="OpenCode" /></a>
   <a href="https://understand-anything.com"><img src="https://img.shields.io/badge/專案首頁-d4a574" alt="Homepage" /></a>
   <a href="https://understand-anything.com/demo/"><img src="https://img.shields.io/badge/線上展示-00c853" alt="Live Demo" /></a>
-  <a href="https://discord.gg/pydat66RY"><img src="https://img.shields.io/badge/discord-加入-5865F2?style=flat-square&logo=discord&logoColor=white" alt="Discord" /></a>
 </p>
 
 <p align="center">
-  <img src="assets/hero.png" alt="Understand Anything — 將任何程式碼庫轉換為互動式知識圖譜" width="800" />
+  <img src="../assets/hero.png" alt="Understand Anything — 將任何程式碼庫轉換為互動式知識圖譜" width="800" />
+</p>
+
+<p align="center">
+  <strong>💬 <a href="https://discord.gg/pydat66RY">加入 Discord 社群 &rarr;</a></strong>
+  <br />
+  <em>來提問、分享你的專案、和社群一起討論。</em>
 </p>
 
 ---
@@ -60,7 +65,7 @@ Understand Anything 是一個 [Claude Code Plugin](https://code.claude.com/docs/
 將你的程式碼庫以互動式知識圖譜呈現——每個檔案、函式和類別都是可點擊、可搜尋、可探索的節點。選取任意節點即可檢視淺顯易懂的摘要、依賴關係和引導式學習路徑。
 
 <p align="center">
-  <img src="assets/overview-structural.gif" alt="結構圖——探索檔案、函式、類別及其關係" width="750" />
+  <img src="../assets/overview-structural.gif" alt="結構圖——探索檔案、函式、類別及其關係" width="750" />
 </p>
 
 ### 理解業務邏輯
@@ -68,7 +73,7 @@ Understand Anything 是一個 [Claude Code Plugin](https://code.claude.com/docs/
 切換到領域視圖，查看程式碼如何對應到真實的業務流程——以水平圖的形式展示領域、流程和步驟。
 
 <p align="center">
-  <img src="assets/overview-domain.gif" alt="領域圖——業務領域、流程和處理步驟" width="750" />
+  <img src="../assets/overview-domain.gif" alt="領域圖——業務領域、流程和處理步驟" width="750" />
 </p>
 
 ### 分析知識庫

@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="README.md">English</a> | <a href="README.zh-CN.md">简体中文</a> | <a href="README.zh-TW.md">繁體中文</a> | <a href="README.ja-JP.md">日本語</a> | <a href="README.ko-KR.md">한국어</a> | <a href="README.es-ES.md">Español</a> | <a href="README.tr-TR.md">Türkçe</a>
+  <a href="../README.md">English</a> | <a href="README.zh-CN.md">简体中文</a> | <a href="README.zh-TW.md">繁體中文</a> | <a href="README.ja-JP.md">日本語</a> | <a href="README.ko-KR.md">한국어</a> | <a href="README.es-ES.md">Español</a> | <a href="README.tr-TR.md">Türkçe</a>
 </p>
 
 <p align="center">
@@ -31,11 +31,16 @@
   <a href="#opencode"><img src="https://img.shields.io/badge/OpenCode-38bdf8" alt="OpenCode" /></a>
   <a href="https://understand-anything.com"><img src="https://img.shields.io/badge/Homepage-d4a574" alt="ホームページ" /></a>
   <a href="https://understand-anything.com/demo/"><img src="https://img.shields.io/badge/Live_Demo-00c853" alt="ライブデモ" /></a>
-  <a href="https://discord.gg/pydat66RY"><img src="https://img.shields.io/badge/discord-join-5865F2?style=flat-square&logo=discord&logoColor=white" alt="Discord" /></a>
 </p>
 
 <p align="center">
-  <img src="assets/hero.png" alt="Understand Anything — あらゆるコードベースをインタラクティブなナレッジグラフに変換" width="800" />
+  <img src="../assets/hero.png" alt="Understand Anything — あらゆるコードベースをインタラクティブなナレッジグラフに変換" width="800" />
+</p>
+
+<p align="center">
+  <strong>💬 <a href="https://discord.gg/pydat66RY">Discord コミュニティに参加 &rarr;</a></strong>
+  <br />
+  <em>質問・作品の共有・コミュニティとの交流はこちらから。</em>
 </p>
 
 ---
@@ -61,7 +66,7 @@ Understand Anything は [Claude Code Plugin](https://code.claude.com/docs/en/plu
 コードベースをインタラクティブなナレッジグラフとして表示——すべてのファイル、関数、クラスがクリック・検索・探索可能なノードです。ノードを選択すると、わかりやすい要約、依存関係、ガイド付きツアーが表示されます。
 
 <p align="center">
-  <img src="assets/overview-structural.gif" alt="構造グラフ——ファイル、関数、クラスとその関係を探索" width="750" />
+  <img src="../assets/overview-structural.gif" alt="構造グラフ——ファイル、関数、クラスとその関係を探索" width="750" />
 </p>
 
 ### ビジネスロジックを理解
@@ -69,7 +74,7 @@ Understand Anything は [Claude Code Plugin](https://code.claude.com/docs/en/plu
 ドメインビューに切り替えると、コードが実際のビジネスプロセスにどう対応するかが一目でわかります——ドメイン、フロー、ステップが横方向のグラフとして表示されます。
 
 <p align="center">
-  <img src="assets/overview-domain.gif" alt="ドメイングラフ——ビジネスドメイン、フロー、プロセスステップ" width="750" />
+  <img src="../assets/overview-domain.gif" alt="ドメイングラフ——ビジネスドメイン、フロー、プロセスステップ" width="750" />
 </p>
 
 ### ナレッジベースを分析

@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <a href="README.md">English</a> | <a href="README.zh-CN.md">简体中文</a> | <a href="README.zh-TW.md">繁體中文</a> | <a href="README.ja-JP.md">日本語</a> | <a href="README.ko-KR.md">한국어</a> | <a href="README.es-ES.md">Español</a> | <a href="README.tr-TR.md">Türkçe</a>
+  <a href="../README.md">English</a> | <a href="README.zh-CN.md">简体中文</a> | <a href="README.zh-TW.md">繁體中文</a> | <a href="README.ja-JP.md">日本語</a> | <a href="README.ko-KR.md">한국어</a> | <a href="README.es-ES.md">Español</a> | <a href="README.tr-TR.md">Türkçe</a>
 </p>
 
 <p align="center">
@@ -30,11 +30,16 @@
   <a href="#opencode"><img src="https://img.shields.io/badge/OpenCode-38bdf8" alt="OpenCode" /></a>
   <a href="https://understand-anything.com"><img src="https://img.shields.io/badge/Página_Principal-d4a574" alt="Homepage" /></a>
   <a href="https://understand-anything.com/demo/"><img src="https://img.shields.io/badge/Demo_en_Vivo-00c853" alt="Live Demo" /></a>
-  <a href="https://discord.gg/pydat66RY"><img src="https://img.shields.io/badge/discord-join-5865F2?style=flat-square&logo=discord&logoColor=white" alt="Discord" /></a>
 </p>
 
 <p align="center">
-  <img src="assets/hero.png" alt="Understand Anything — Convierte cualquier código fuente en un grafo de conocimiento interactivo" width="800" />
+  <img src="../assets/hero.png" alt="Understand Anything — Convierte cualquier código fuente en un grafo de conocimiento interactivo" width="800" />
+</p>
+
+<p align="center">
+  <strong>💬 <a href="https://discord.gg/pydat66RY">Únete a la comunidad de Discord &rarr;</a></strong>
+  <br />
+  <em>Pregunta, comparte lo que construyes y recibe ayuda de la comunidad.</em>
 </p>
 
 ---
@@ -60,7 +65,7 @@ Understand Anything es un [Claude Code Plugin](https://code.claude.com/docs/en/p
 Navega tu código como un grafo de conocimiento interactivo: cada archivo, función y clase es un nodo que puedes hacer clic, buscar y explorar. Selecciona cualquier nodo para ver resúmenes en lenguaje natural, relaciones y recorridos guiados.
 
 <p align="center">
-  <img src="assets/overview-structural.gif" alt="Grafo estructural — explora archivos, funciones, clases y sus relaciones" width="750" />
+  <img src="../assets/overview-structural.gif" alt="Grafo estructural — explora archivos, funciones, clases y sus relaciones" width="750" />
 </p>
 
 ### Comprende la lógica de negocio
@@ -68,7 +73,7 @@ Navega tu código como un grafo de conocimiento interactivo: cada archivo, funci
 Cambia a la vista de dominio y observa cómo tu código se mapea a procesos de negocio reales: dominios, flujos y pasos representados como un grafo horizontal.
 
 <p align="center">
-  <img src="assets/overview-domain.gif" alt="Grafo de dominio — dominios de negocio, flujos y pasos de proceso" width="750" />
+  <img src="../assets/overview-domain.gif" alt="Grafo de dominio — dominios de negocio, flujos y pasos de proceso" width="750" />
 </p>
 
 ### Analiza bases de conocimiento

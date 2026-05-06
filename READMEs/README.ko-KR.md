@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <a href="README.md">English</a> | <a href="README.zh-CN.md">简体中文</a> | <a href="README.zh-TW.md">繁體中文</a> | <a href="README.ja-JP.md">日本語</a> | <a href="README.ko-KR.md">한국어</a> | <a href="README.es-ES.md">Español</a> | <a href="README.tr-TR.md">Türkçe</a>
+  <a href="../README.md">English</a> | <a href="README.zh-CN.md">简体中文</a> | <a href="README.zh-TW.md">繁體中文</a> | <a href="README.ja-JP.md">日本語</a> | <a href="README.ko-KR.md">한국어</a> | <a href="README.es-ES.md">Español</a> | <a href="README.tr-TR.md">Türkçe</a>
 </p>
 
 <p align="center">
@@ -30,11 +30,16 @@
   <a href="#opencode"><img src="https://img.shields.io/badge/OpenCode-38bdf8" alt="OpenCode" /></a>
   <a href="https://understand-anything.com"><img src="https://img.shields.io/badge/홈페이지-d4a574" alt="Homepage" /></a>
   <a href="https://understand-anything.com/demo/"><img src="https://img.shields.io/badge/라이브_데모-00c853" alt="Live Demo" /></a>
-  <a href="https://discord.gg/pydat66RY"><img src="https://img.shields.io/badge/discord-join-5865F2?style=flat-square&logo=discord&logoColor=white" alt="Discord" /></a>
 </p>
 
 <p align="center">
-  <img src="assets/hero.png" alt="Understand Anything — 모든 코드베이스를 인터랙티브 지식 그래프로 변환" width="800" />
+  <img src="../assets/hero.png" alt="Understand Anything — 모든 코드베이스를 인터랙티브 지식 그래프로 변환" width="800" />
+</p>
+
+<p align="center">
+  <strong>💬 <a href="https://discord.gg/pydat66RY">Discord 커뮤니티 참여하기 &rarr;</a></strong>
+  <br />
+  <em>질문하고, 만든 것을 공유하고, 커뮤니티의 도움을 받으세요.</em>
 </p>
 
 ---
@@ -60,7 +65,7 @@ Understand Anything은 [Claude Code Plugin](https://code.claude.com/docs/en/plug
 코드베이스를 인터랙티브 지식 그래프로 탐색하세요. 모든 파일, 함수, 클래스가 클릭, 검색, 탐색 가능한 노드입니다. 노드를 선택하면 이해하기 쉬운 요약, 관계, 가이드 투어를 확인할 수 있습니다.
 
 <p align="center">
-  <img src="assets/overview-structural.gif" alt="구조 그래프 — 파일, 함수, 클래스 및 관계 탐색" width="750" />
+  <img src="../assets/overview-structural.gif" alt="구조 그래프 — 파일, 함수, 클래스 및 관계 탐색" width="750" />
 </p>
 
 ### 비즈니스 로직 이해
@@ -68,7 +73,7 @@ Understand Anything은 [Claude Code Plugin](https://code.claude.com/docs/en/plug
 도메인 뷰로 전환하면 코드가 실제 비즈니스 프로세스에 어떻게 매핑되는지 확인할 수 있습니다. 도메인, 흐름, 단계가 수평 그래프로 표시됩니다.
 
 <p align="center">
-  <img src="assets/overview-domain.gif" alt="도메인 그래프 — 비즈니스 도메인, 흐름 및 프로세스 단계" width="750" />
+  <img src="../assets/overview-domain.gif" alt="도메인 그래프 — 비즈니스 도메인, 흐름 및 프로세스 단계" width="750" />
 </p>
 
 ### 지식 베이스 분석

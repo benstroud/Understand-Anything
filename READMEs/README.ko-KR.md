@@ -21,7 +21,7 @@
 
 <p align="center">
   <a href="#-빠른-시작"><img src="https://img.shields.io/badge/빠른_시작-blue" alt="Quick Start" /></a>
-  <a href="https://github.com/Lum1104/Understand-Anything/blob/main/LICENSE"><img src="https://img.shields.io/badge/라이선스-MIT-yellow" alt="License: MIT" /></a>
+  <a href="https://github.com/benstroud/Understand-Anything/blob/main/LICENSE"><img src="https://img.shields.io/badge/라이선스-MIT-yellow" alt="License: MIT" /></a>
   <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/Claude_Code-8A2BE2" alt="Claude Code" /></a>
   <a href="#codex"><img src="https://img.shields.io/badge/Codex-000000" alt="Codex" /></a>
   <a href="#vs-code--github-copilot"><img src="https://img.shields.io/badge/Copilot-24292e" alt="Copilot" /></a>
@@ -120,7 +120,7 @@ Understand Anything은 [Claude Code Plugin](https://code.claude.com/docs/en/plug
 ### 1. 플러그인 설치
 
 ```bash
-/plugin marketplace add Lum1104/Understand-Anything
+/plugin marketplace add benstroud/Understand-Anything
 /plugin install understand-anything
 ```
 
@@ -171,7 +171,7 @@ Understand-Anything은 다양한 AI 코딩 플랫폼에서 사용할 수 있습�
 ### Claude Code (네이티브)
 
 ```bash
-/plugin marketplace add Lum1104/Understand-Anything
+/plugin marketplace add benstroud/Understand-Anything
 /plugin install understand-anything
 ```
 
@@ -179,14 +179,14 @@ Understand-Anything은 다양한 AI 코딩 플랫폼에서 사용할 수 있습�
 
 Codex에 입력하세요:
 ```
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.codex/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.codex/INSTALL.md
 ```
 
 ### OpenCode
 
 OpenCode에 입력하세요:
 ```
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.opencode/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.opencode/INSTALL.md
 ```
 
 ### Cursor
@@ -199,34 +199,34 @@ GitHub Copilot(v1.108+)이 설치된 VS Code는 `.copilot-plugin/plugin.json`을
 
 모든 프로젝트에서 사용하려면(개인 스킬) GitHub Copilot에 입력하세요:
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.vscode/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.vscode/INSTALL.md
 ```
 
 ### Copilot CLI
 
 ```bash
-copilot plugin install Lum1104/Understand-Anything:understand-anything-plugin
+copilot plugin install benstroud/Understand-Anything:understand-anything-plugin
 ```
 
 ### Antigravity
 
 Antigravity에 입력하세요:
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.antigravity/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.antigravity/INSTALL.md
 ```
 
 ### Gemini CLI
 
 Gemini CLI에 입력하세요:
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.gemini/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.gemini/INSTALL.md
 ```
 
 ### Pi Agent
 
 Pi Agent에 입력하세요:
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.pi/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.pi/INSTALL.md
 ```
 
 ### 플랫폼 호환성

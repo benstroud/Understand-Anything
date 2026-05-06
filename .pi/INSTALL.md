@@ -9,7 +9,7 @@
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/Lum1104/Understand-Anything.git ~/.pi/understand-anything
+   git clone https://github.com/benstroud/Understand-Anything.git ~/.pi/understand-anything
    ```
 
 2. **Create the skills symlinks:**

@@ -2,10 +2,9 @@
 name: sync-fork
 description: >
   Syncs this fork (benstroud/Understand-Anything) with the upstream repo
-  (Lum1104/Understand-Anything), then enforces the fork's one invariant:
-  no openclaw files or references exist anywhere in the tree.
-  Also ensures README.md contains the correct fork notice and all
-  installation URLs point to benstroud/Understand-Anything.
+  (Lum1104/Understand-Anything), then enforces the fork's invariants:
+  no openclaw files or references, all install/fetch URLs point to the fork,
+  and README.md contains the correct fork notice.
 
   Use this skill whenever the user says anything like "sync the fork",
   "pull in upstream changes", "bring in the latest from upstream",
@@ -19,7 +18,7 @@ This fork of Lum1104/Understand-Anything exists for a single reason:
 organizations whose security policies block software containing files that
 reference "openclaw". The fork is otherwise identical to upstream. Your job
 when this skill triggers is to keep it that way — current with upstream,
-and free of every trace of openclaw.
+and consistent in pointing users to the fork rather than the upstream.
 
 ## Context
 
@@ -27,8 +26,8 @@ and free of every trace of openclaw.
 - Fork: `https://github.com/benstroud/Understand-Anything`
 - Fork invariants:
   1. No openclaw files, directories, or text references anywhere
-  2. README.md contains the fork notice callout (see below)
-  3. All install commands and INSTALL.md fetch URLs reference `benstroud/Understand-Anything`
+  2. README.md contains the fork notice callout (see Step 2)
+  3. All install commands, INSTALL.md clone/fetch URLs, plugin.json homepage/repository fields, and homepage source files reference `benstroud/Understand-Anything`
 
 > [!IMPORTANT]
 > OpenCode is **not** openclaw. OpenCode references are fine to keep.
@@ -78,14 +77,18 @@ rm -rf .openclaw
 
 The README.md and READMEs/ translated files all follow the same structure, so the same patterns apply across all of them.
 
-**If it's a docs file** (e.g., `docs/superpowers/`), remove the openclaw-specific lines (references to openclaw paths, openclaw install instructions) while preserving surrounding context.
+**If it's a docs file** (e.g., `docs/superpowers/`), remove the openclaw-specific lines while preserving surrounding context.
 
 After editing, confirm no openclaw references remain:
 ```bash
 grep -ril "openclaw" . --exclude-dir=.git
 ```
 
-If anything is still found, fix it before continuing.
+Expected survivors (these are intentional and should NOT be removed):
+- `README.md` — the fork notice text that explains the fork's purpose
+- `.claude/skills/sync-fork/SKILL.md` — this file's own instructions
+
+If anything else is found, fix it before continuing.
 
 ### 1d. Commit openclaw removals (if any)
 
@@ -111,30 +114,36 @@ Open `README.md` and look for this exact `[!NOTE]` callout block near the top
 
 If it's missing, insert it immediately before the `> [!TIP]` block.
 
-### 2b. Check install URLs
+### 2b. Check install URLs across the full codebase
 
-Scan README.md for any occurrence of `Lum1104/Understand-Anything` in a
-context that is an install command or INSTALL.md fetch URL. Specifically look for:
+After merging upstream, scan for any `Lum1104/Understand-Anything` references that
+should point to the fork instead. Run:
 
-- `/plugin marketplace add Lum1104/Understand-Anything` → change to `benstroud/Understand-Anything`
-- `raw.githubusercontent.com/Lum1104/Understand-Anything/` in fetch instructions → change to `raw.githubusercontent.com/benstroud/Understand-Anything/`
-- `copilot plugin install Lum1104/Understand-Anything:` → change to `benstroud/Understand-Anything:`
+```bash
+grep -rn "Lum1104/Understand-Anything" . --exclude-dir=.git \
+  --include="*.md" --include="*.json" --include="*.ts" --include="*.tsx" \
+  --include="*.astro" --include="*.html"
+```
 
-Do **not** change `Lum1104` references that are:
-- Star history badge/chart URLs
-- The license badge URL
-- The upstream link inside the fork notice itself
-- Links to example repos or other projects by Lum1104
+**Update to `benstroud/Understand-Anything`** wherever found in:
+- `/plugin marketplace add ...` commands (README.md, READMEs/*.md, docs/)
+- `raw.githubusercontent.com/Lum1104/...` fetch URLs in install instructions
+- `copilot plugin install Lum1104/...` commands
+- `git clone https://github.com/Lum1104/Understand-Anything.git` in INSTALL.md files (`.codex/`, `.opencode/`, `.gemini/`, `.pi/`, `.vscode/`, `.antigravity/`)
+- `homepage` and `repository` fields in plugin.json files (`.claude-plugin/`, `.copilot-plugin/`, `.cursor-plugin/`, `understand-anything-plugin/.claude-plugin/`)
+- `githubUrl` variable assignments in homepage Astro components (`homepage/src/components/`)
+- Issue/bug report URL in `understand-anything-plugin/packages/dashboard/src/components/WarningBanner.tsx`
 
-A good heuristic: only update `Lum1104/Understand-Anything` occurrences that
-appear inside `` ``` `` code blocks or inline `backtick` spans that are
-installation instructions.
+**Leave as `Lum1104/Understand-Anything`**:
+- `api.star-history.com` badge and chart URLs (they track the upstream's star count)
+- The upstream link inside the fork notice itself (`README.md` line with `[!NOTE]`)
+- Issue/PR number links in `docs/superpowers/` (e.g. `issues/61`) — they reference specific upstream issues
 
-### 2c. Commit README fixes (if any)
+### 2c. Commit all fixes (if any)
 
 If you changed anything in steps 2a or 2b:
 ```bash
-git add README.md
+git add -A
 git commit -m "chore: maintain fork notice and install URLs"
 ```
 
@@ -151,8 +160,9 @@ Summarize what happened:
 **Openclaw cleanup:**
   - Files deleted: [list or "none"]
   - Files edited: [list or "none"]
+**URL/install fixes:**
+  - Files updated: [list or "none"]
 **README:**
   - Fork notice: present / added
-  - Install URLs: correct / N URLs updated
 **Commits created:** [list commit hashes + messages, or "none"]
 ```

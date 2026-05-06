@@ -22,7 +22,7 @@
 
 <p align="center">
   <a href="#-クイックスタート"><img src="https://img.shields.io/badge/Quick_Start-blue" alt="クイックスタート" /></a>
-  <a href="https://github.com/Lum1104/Understand-Anything/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow" alt="License: MIT" /></a>
+  <a href="https://github.com/benstroud/Understand-Anything/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow" alt="License: MIT" /></a>
   <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/Claude_Code-8A2BE2" alt="Claude Code" /></a>
   <a href="#codex"><img src="https://img.shields.io/badge/Codex-000000" alt="Codex" /></a>
   <a href="#vs-code--github-copilot"><img src="https://img.shields.io/badge/Copilot-24292e" alt="Copilot" /></a>
@@ -121,7 +121,7 @@ Understand Anything は [Claude Code Plugin](https://code.claude.com/docs/en/plu
 ### 1. プラグインをインストール
 
 ```bash
-/plugin marketplace add Lum1104/Understand-Anything
+/plugin marketplace add benstroud/Understand-Anything
 /plugin install understand-anything
 ```
 
@@ -172,7 +172,7 @@ Understand-Anythingは複数のAIコーディングプラットフォームで�
 ### Claude Code（ネイティブ）
 
 ```bash
-/plugin marketplace add Lum1104/Understand-Anything
+/plugin marketplace add benstroud/Understand-Anything
 /plugin install understand-anything
 ```
 
@@ -180,14 +180,14 @@ Understand-Anythingは複数のAIコーディングプラットフォームで�
 
 Codexに以下を伝えてください：
 ```
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.codex/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.codex/INSTALL.md
 ```
 
 ### OpenCode
 
 OpenCodeに以下を伝えてください：
 ```
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.opencode/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.opencode/INSTALL.md
 ```
 
 ### Cursor
@@ -200,34 +200,34 @@ GitHub Copilot拡張機能（v1.108+）をインストールしたVS Codeは、`
 
 全プロジェクトで使用するパーソナルスキルとして設定する場合は、GitHub Copilotに以下を伝えてください：
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.vscode/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.vscode/INSTALL.md
 ```
 
 ### Copilot CLI
 
 ```bash
-copilot plugin install Lum1104/Understand-Anything:understand-anything-plugin
+copilot plugin install benstroud/Understand-Anything:understand-anything-plugin
 ```
 
 ### Antigravity
 
 Antigravityに以下を伝えてください：
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.antigravity/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.antigravity/INSTALL.md
 ```
 
 ### Gemini CLI
 
 Gemini CLIに以下を伝えてください：
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.gemini/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.gemini/INSTALL.md
 ```
 
 ### Pi Agent
 
 Pi Agentに以下を伝えてください：
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.pi/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.pi/INSTALL.md
 ```
 
 ### プラットフォーム互換性

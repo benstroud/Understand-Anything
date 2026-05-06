@@ -10,7 +10,7 @@
 Clone this repo and open it in VS Code. GitHub Copilot automatically discovers the plugin via `.copilot-plugin/plugin.json` — no manual steps required.
 
 ```bash
-git clone https://github.com/Lum1104/Understand-Anything.git
+git clone https://github.com/benstroud/Understand-Anything.git
 code Understand-Anything
 ```
 
@@ -20,7 +20,7 @@ Skills will appear when you type `/` in GitHub Copilot Chat.
 
 1. **Clone the repository** (to any location you prefer):
    ```bash
-   git clone https://github.com/Lum1104/Understand-Anything.git ~/understand-anything
+   git clone https://github.com/benstroud/Understand-Anything.git ~/understand-anything
    ```
 
 2. **Create a symlink for each skill** into `~/.copilot/skills/`:

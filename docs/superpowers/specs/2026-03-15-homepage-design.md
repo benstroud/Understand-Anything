@@ -45,7 +45,7 @@ Staggered fade-in animation:
 - Headline: "Get started in 30 seconds"
 - Code block:
   ```
-  /plugin marketplace add Lum1104/Understand-Anything
+  /plugin marketplace add benstroud/Understand-Anything
   /plugin install understand-anything
   /understand
   ```

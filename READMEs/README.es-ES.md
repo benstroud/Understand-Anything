@@ -21,7 +21,7 @@
 
 <p align="center">
   <a href="#-inicio-rápido"><img src="https://img.shields.io/badge/Inicio_Rápido-blue" alt="Quick Start" /></a>
-  <a href="https://github.com/Lum1104/Understand-Anything/blob/main/LICENSE"><img src="https://img.shields.io/badge/Licencia-MIT-yellow" alt="License: MIT" /></a>
+  <a href="https://github.com/benstroud/Understand-Anything/blob/main/LICENSE"><img src="https://img.shields.io/badge/Licencia-MIT-yellow" alt="License: MIT" /></a>
   <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/Claude_Code-8A2BE2" alt="Claude Code" /></a>
   <a href="#codex"><img src="https://img.shields.io/badge/Codex-000000" alt="Codex" /></a>
   <a href="#vs-code--github-copilot"><img src="https://img.shields.io/badge/Copilot-24292e" alt="Copilot" /></a>
@@ -120,7 +120,7 @@ Apunta `/understand-knowledge` a un [wiki LLM con patrón Karpathy](https://gist
 ### 1. Instala el plugin
 
 ```bash
-/plugin marketplace add Lum1104/Understand-Anything
+/plugin marketplace add benstroud/Understand-Anything
 /plugin install understand-anything
 ```
 
@@ -171,7 +171,7 @@ Understand-Anything funciona en múltiples plataformas de codificación con IA.
 ### Claude Code (Nativo)
 
 ```bash
-/plugin marketplace add Lum1104/Understand-Anything
+/plugin marketplace add benstroud/Understand-Anything
 /plugin install understand-anything
 ```
 
@@ -179,14 +179,14 @@ Understand-Anything funciona en múltiples plataformas de codificación con IA.
 
 Dile a Codex:
 ```
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.codex/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.codex/INSTALL.md
 ```
 
 ### OpenCode
 
 Dile a OpenCode:
 ```
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.opencode/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.opencode/INSTALL.md
 ```
 
 ### Cursor
@@ -199,34 +199,34 @@ VS Code con GitHub Copilot (v1.108+) detecta automáticamente el plugin a travé
 
 Para habilidades personales (disponibles en todos los proyectos), dile a GitHub Copilot:
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.vscode/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.vscode/INSTALL.md
 ```
 
 ### Copilot CLI
 
 ```bash
-copilot plugin install Lum1104/Understand-Anything:understand-anything-plugin
+copilot plugin install benstroud/Understand-Anything:understand-anything-plugin
 ```
 
 ### Antigravity
 
 Dile a Antigravity:
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.antigravity/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.antigravity/INSTALL.md
 ```
 
 ### Gemini CLI
 
 Dile a Gemini CLI:
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.gemini/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.gemini/INSTALL.md
 ```
 
 ### Pi Agent
 
 Dile a Pi Agent:
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Lum1104/Understand-Anything/refs/heads/main/.pi/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/benstroud/Understand-Anything/refs/heads/main/.pi/INSTALL.md
 ```
 
 ### Compatibilidad de Plataformas
